@@ -2,17 +2,8 @@ input.form-control {
     margin-bottom: 5px;
 }
 
-body {
-    padding-top: 60px;
-    padding-bottom: 60px;
+.color-me-white{
+    color: white;
 }
 
-.navbar a,
-.form-control{
 
-}
-
-a,
-.btn{
-
-}

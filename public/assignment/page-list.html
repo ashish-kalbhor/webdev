@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Website</title>
+    <title>Page List</title>
     <link href="css/style.css" rel="stylesheet"/>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js"></script>
@@ -17,7 +17,7 @@
                 <a href="#" class="navbar-link  color-me-white"><span class="glyphicon glyphicon-chevron-left"></span></a>
             </p>
             <a class="navbar-brand  color-me-white" href="#">
-                Edit Website
+                Pages
             </a>
             <p class="navbar-text">
                 <a href="#" class="navbar-link  color-me-white"><span class="glyphicon glyphicon-plus"></span></a>
@@ -26,16 +26,30 @@
     </div>
 </nav>
 
+
 <div class="container">
-    <form>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Name"/>
-            <label for="description">Description</label>
-            <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
-        </div>
-        <a class="btn btn-danger btn-block" href="#">Delete</a>
-    </form>
+    <ul class="list-group">
+        <li class="list-group-item">
+            <a href="#">Blog Post</a>
+            <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+        </li>
+        <li class="list-group-item">
+            <a href="#">Blogs</a>
+            <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+        </li>
+        <li class="list-group-item">
+            <a href="#">Home</a>
+            <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+        </li>
+        <li class="list-group-item">
+            <a href="#">About</a>
+            <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+        </li>
+        <li class="list-group-item">
+            <a href="#">Contact us</a>
+            <a href="#" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+        </li>
+    </ul>
 </div>
 
 <nav class="navbar navbar-fixed-bottom bg-primary">
