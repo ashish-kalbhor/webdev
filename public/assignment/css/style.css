@@ -6,16 +6,31 @@ input.form-control {
     margin-bottom: 5px;
 }
 
-.navbar-default .navbar-brand{
+.navbar-default {
+    background-color: #337ab7;
+}
+
+.navbar-default .navbar-brand {
     color: white;
 }
 
-.navbar-default {
-    background-color: #428bca;
-    border-color: #e7e7e7;
+.navbar .navbar-nav {
+    display: inline-block;
+    float: none;
+    vertical-align: top;
 }
 
-.glyphicon-ok{
+.navbar .navbar-collapse {
+    text-align: center;
+}
+
+.navbar-default .navbar-nav .navbar-font {
+    color:white;
+    font-size:18px;
+}
+
+.glyphicon-ok,
+.glyphicon-user{
     margin-right: 15px;
     color: white;
 }
