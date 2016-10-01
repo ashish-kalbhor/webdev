@@ -1,43 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Page List</title>
-    <link href="css/style.css" rel="stylesheet"/>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+    <title>Widget List</title>
 </head>
 <body>
-
-<nav class="navbar navbar-static-top bg-primary">
-    <div class="container">
-        <div class="navbar-header">
-            <p class="navbar-text">
-                <a href="page-list.html" class="navbar-link  color-me-white"><span class="glyphicon glyphicon-chevron-left"></span></a>
-            </p>
-            <a class="navbar-brand  color-me-white" href="#">
-                Widgets
-            </a>
-            <p class="navbar-text">
-                <a href="widget-chooser.html.html" class="navbar-link  color-me-white"><span class="glyphicon glyphicon-plus"></span></a>
-            </p>
-        </div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right pull-left">
+            <li><a class="navbar-font" href="page-list.html"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-header">
+            <li class=""><a class="navbar-font">Widgets</a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right pull-right">
+            <li><a class="navbar-font" href="widget-chooser.html"><span class="glyphicon glyphicon-plus"></span></a></li>
+        </ul>
     </div>
 </nav>
 
 
 <div class="container">
-    <h1>Widget stuff goes here</h1>
-    <a href="widget-chooser.html" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+    <div class="list-group">
+        <div class="relative-position">
+            <div class="container-fluid zero-right-padding">
+                <h4>Redwood National State Park at California</h4>
+            </div>
+            <div class="absolute-position list-element-menu zero-right-padding">
+                <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+            </div>
+        </div>
+        <div class="relative-position">
+            <div class="container-fluid zero-right-padding">
+                <img class="img-responsive" src="http://i2.cdn.turner.com/cnnnext/dam/assets/160803172335-01-redwoods-super-169.jpg" alt="Sample Image"/>
+            </div>
+            <div class="absolute-position list-element-menu zero-right-padding">
+                <a href="#"><span class="glyphicon glyphicon-cog"></span></a>
+                <a href="#"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+            </div>
+        </div>
+    </div>
 </div>
 
-<nav class="navbar navbar-fixed-bottom bg-primary">
-    <div class="container">
-        <p class="navbar-text">
-            <a href="profile.html" class="navbar-link  color-me-white"><span class="glyphicon glyphicon-user"></span></a>
-        </p>
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav navbar-right pull-right">
+            <li><a class="navbar-font" href="profile.html"><span class="glyphicon glyphicon-user"></span></a></li>
+        </ul>
     </div>
 </nav>
-
 </body>
 </html>
