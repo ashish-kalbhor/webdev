@@ -1,9 +1,21 @@
+body{
+    padding-top: 65px;
+}
+
 input.form-control {
     margin-bottom: 5px;
 }
 
-.color-me-white{
+.navbar-default .navbar-brand{
     color: white;
 }
 
+.navbar-default {
+    background-color: #428bca;
+    border-color: #e7e7e7;
+}
 
+.glyphicon-ok{
+    margin-right: 15px;
+    color: white;
+}
