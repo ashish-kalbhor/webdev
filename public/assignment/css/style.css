@@ -45,6 +45,22 @@ input.form-control {
     padding-right: 0px;
 }
 
+.youtube-widget {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+}
+
+.youtube-widget iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 15px;
+    margin-right: 15px;
+    width: 100%;
+    height: 100%;
+}
+
 .glyphicon-ok,
 .glyphicon-user{
     margin-right: 15px;
