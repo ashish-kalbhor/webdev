@@ -1,5 +1,11 @@
 body{
     padding-top: 65px;
+    padding-bottom: 65px;
+    overflow: hidden;
+}
+
+.scroll-overflow{
+    overflow: scroll;
 }
 
 input.form-control {
@@ -25,8 +31,26 @@ input.form-control {
 }
 
 .navbar-default .navbar-nav .navbar-font {
-    color:white;
-    font-size:18px;
+    padding: 10px 17px;
+    color: white;
+    font-size: 18px;
+    line-height: 25px;
+    display: inline-block;
+}
+
+.divider-right {
+    border-right: 1px solid lightgray;
+    -webkit-border-vertical-spacing: 20px;
+    margin-top: -45px;
+    height: 100vh;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.list-group-item{
+    border: none;
 }
 
 .relative-position{
@@ -36,13 +60,14 @@ input.form-control {
     position: absolute;
 }
 .list-element-menu {
-    top: 0px;
-    right: 0px;
+    top: 0;
+    right: 0;
     z-index: 10;
     background-color: white;
+    position: absolute;
 }
 .zero-right-padding {
-    padding-right: 0px;
+    padding-right: 0;
 }
 
 .youtube-widget {
