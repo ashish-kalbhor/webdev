@@ -28,4 +28,4 @@
                 redirectTo: "/views/user/login.view.client.html"
             })
     }
-})
+})();
