@@ -7,15 +7,15 @@
 
 
     function WebsiteListController($scope) {
-
+        var vm = this;
     }
 
     function NewWebsiteController($scope) {
-
+        var vm = this;
     }
 
     function EditWebsiteController($scope) {
-
+        var vm = this;
     }
 
 })();

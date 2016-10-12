@@ -7,15 +7,16 @@
 
 
     function WidgetListController($scope) {
+        var vm = this;
 
     }
 
     function NewWidgetController($scope) {
-
+        var vm = this;
     }
 
     function EditWidgetController($scope) {
-
+        var vm = this;
     }
 
 })();
