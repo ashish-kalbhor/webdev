@@ -12,12 +12,12 @@
         ];
 
         var api = {
-            "createUser" : "createUser",
-            "findUserById" : "findUserById",
-            "findUserByUsername" : "findUserByUsername",
-            "findUserByCredentials" : "findUserByCredentials",
-            "updateUser" : "updateUser",
-            "deleteUser" : "deleteUser"
+            createUser : createUser,
+            findUserById : findUserById,
+            findUserByUsername : findUserByUsername,
+            findUserByCredentials : findUserByCredentials,
+            updateUser : updateUser,
+            deleteUser : deleteUser
         };
 
         return api;
@@ -27,7 +27,13 @@
         }
 
         function  findUserById(userId) {
-
+            for(var u in users){
+                user = users[u];
+                if(user._id == userId){
+                    return user;
+                }
+            }
+            return null;
         }
 
         function  findUserByUsername(username) {
@@ -36,6 +42,13 @@
 
         function  findUserByCredentials(username, password) {
 
+            for(var u in users){
+                user = users[u];
+                if(user.username == username && user.password == password){
+                    return user;
+                }
+            }
+            return null;
         }
 
         function  updateUser(userId, user) {

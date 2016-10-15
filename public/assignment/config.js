@@ -12,7 +12,7 @@
             })
             .when("/user/:uid", {
                 templateUrl: "views/user/profile.view.client.html",
-                controller: "RegisterController",
+                controller: "ProfileController",
                 controllerAs: "model"
             })
             .when("/register", {
