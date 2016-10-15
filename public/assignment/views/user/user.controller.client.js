@@ -5,7 +5,6 @@
         .controller("RegisterController", RegisterController)
         .controller("ProfileController", ProfileController);
 
-
     function LoginController($location, UserService) {
         var vm = this;
         vm.login = login;
@@ -24,8 +23,24 @@
         }
     }
 
-    function RegisterController($scope) {
+    function RegisterController($location, UserService) {
         var vm = this;
+        vm.register = register;
+
+        function register(user) {
+            if(user == null || user.username == null){
+                vm.error = "Enter valid name !";
+            }else{
+
+                if(user.password == user.verify){
+                    var userId = UserService.createUser(user);
+                    var user = UserService.findUserById(userId);
+                    $location.url("/user/" + user._id);
+                }else{
+                    vm.error = "Passwords do not match !"
+                }
+            }
+        }
     }
 
     function ProfileController($routeParams, UserService) {

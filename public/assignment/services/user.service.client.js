@@ -23,7 +23,11 @@
         return api;
 
         function  createUser(user) {
-
+            var prevId = users[users.length-1]._id;
+            var id = prevId + 1;
+            var newUser = {_id: id, username: user.username, password: user.password, firstName: user.username, lastName: user.username};
+            users.push(newUser);
+            return id;
         }
 
         function  findUserById(userId) {
@@ -64,6 +68,7 @@
         function  deleteUser(userId) {
 
         }
+
     }
 
 })();
