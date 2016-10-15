@@ -15,10 +15,10 @@
 <div class="container">
     <ul class="list-group">
         <li ng-repeat="website in model.websites" class="list-group-item">
-            <a href="#/user/{{websites._user}}/website/{{websites._id}}/page">
-                {{websites.name}}
+            <a href="#/user/{{website.developerId}}/website/{{websites._id}}">
+                {{website.name}}
             </a>
-            <a href="#/user/{{websites._user}}/website/{{websites._id}}" class="pull-right">
+            <a href="#/user/{{website.developerId}}/website/{{websites._id}}" class="pull-right">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
         </li>

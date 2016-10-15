@@ -6,8 +6,10 @@
         .controller("EditWebsiteController", EditWebsiteController);
 
 
-    function WebsiteListController($scope) {
+    function WebsiteListController($routeParams, WebsiteService) {
         var vm = this;
+        var userId = parseInt($routeParams['uid']);
+        vm.websites = WebsiteService.findWebsiteByUserId(userId);
     }
 
     function NewWebsiteController($scope) {

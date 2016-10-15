@@ -14,11 +14,11 @@
         ];
 
         var api = {
-            "createWebsite" : "createWebsite",
-            "findWebsiteByUserId" : "findWebsiteByUserId",
-            "findWebsiteById" : "findWebsiteById",
-            "updateWebsite" : "updateWebsite",
-            "deleteWebsite" : "deleteWebsite"
+            createWebsite : createWebsite,
+            findWebsiteByUserId : findWebsiteByUserId,
+            findWebsiteById : findWebsiteById,
+            updateWebsite : updateWebsite,
+            deleteWebsite : deleteWebsite
         };
 
         return api;
@@ -28,11 +28,23 @@
         }
 
         function  findWebsiteByUserId(userId) {
-
+            var results = [];
+            for(var w in websites){
+                if(websites[w].developerId == userId){
+                    results.push(websites[w]);
+                }
+            }
+            return results;
         }
 
         function  findWebsiteById(websiteId) {
-
+            var results = [];
+            for(var w in websites){
+                if(websites[w]._id == websiteId){
+                    results.push(websites[w]);
+                }
+            }
+            return results;
         }
 
         function  updateWebsite(websiteId, website) {
