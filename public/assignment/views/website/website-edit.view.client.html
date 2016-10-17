@@ -1,50 +1,41 @@
-<body class="scroll-overflow">
+<body class="scroll-overflow" xmlns="http://www.w3.org/1999/html">
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="row container-fluid">
         <div class="col-xs-4 hidden-xs">
             <ul class="nav navbar-nav">
-                <li><a class="navbar-font navbar-link" href="#/website-list"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                <li><a class="navbar-font navbar-link" href="#/user/{{model.userId}}/website"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-header">
                 <li><a class="navbar-font">Websites</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="navbar-font" href="#/website-list"><span class="glyphicon glyphicon-plus"></span></a></li>
+                <li><a class="navbar-font" href="#/user/{{model.userId}}/website/new"><span class="glyphicon glyphicon-plus"></span></a></li>
             </ul>
         </div>
         <div class="col-xs-12 col-sm-8">
             <ul class="nav navbar-nav">
-                <li><a class="navbar-font navbar-link visible-xs" href="#/website-list"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+                <li><a class="navbar-font navbar-link visible-xs" href="#/user/{{model.userId}}/website"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
             </ul>
             <ul class="nav navbar-nav navbar-header">
                 <li><a class="navbar-font">Edit Website</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a class="navbar-font" href="#/website-list"><span class="glyphicon glyphicon-ok"></span></a></li>
+                <li><a ng-click="model.updateWebsite(model.website.editableWebsite._id, model.website.editableWebsite)" class="navbar-font" href=""><span class="glyphicon glyphicon-ok"></span></a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-
 <div class="col-xs-4 hidden-xs divider-right">
     <div class="row container-fluid">
         <ul class="list-group">
-            <li class="list-group-item">
-                <a href="#/page-list">Address Book App</a>
-                <a href="#/website-edit" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-            </li>
-            <li class="list-group-item">
-                <a href="#/page-list">Blogger</a>
-                <a href="#/website-edit" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-            </li>
-            <li class="list-group-item">
-                <a href="#/page-list">Blogging App</a>
-                <a href="#/website-edit" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
-            </li>
-            <li class="list-group-item">
-                <a href="#/page-list">Script Testing App</a>
-                <a href="#/website-edit" class="pull-right"><span class="glyphicon glyphicon-cog"></span></a>
+            <li ng-repeat="website in model.websites" class="list-group-item">
+                <a href="#/user/{{website.developerId}}/website/{{websites._id}}">
+                    {{website.name}}
+                </a>
+                <a href="#/user/{{website.developerId}}/website/{{websites._id}}" class="pull-right">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
             </li>
         </ul>
     </div>
@@ -55,13 +46,13 @@
     <form class="padding-left-12">
         <div class="form-group">
             <label for="name">Website Name</label>
-            <input type="text" class="form-control" id="name" value="Blogging App"/>
+            <input ng-model="model.editableWebsite.name" type="text" class="form-control" id="name"/>
         </div>
         <div class="form-group">
             <label for="description">Website Description</label>
             <textarea class="form-control" rows="5" id="description">A Blogging App is an application based on the top of Blogger service. This content will be soon updated. Stay tuned!</textarea>
         </div>
-        <a class="btn btn-danger btn-block" href="#/website-list">Delete</a>
+        <a ng-click="model.deleteWebsite(model.editableWebsite._id)" class="btn btn-danger btn-block" href="">Delete</a>
     </form>
 </div>
 

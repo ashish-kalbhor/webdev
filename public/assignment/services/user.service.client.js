@@ -66,7 +66,9 @@
         }
 
         function  deleteUser(userId) {
-
+            users.remove(function (u) {
+                return u._id == userId;
+            });
         }
 
     }

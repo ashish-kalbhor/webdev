@@ -24,7 +24,11 @@
         return api;
 
         function  createWebsite(userId, website) {
-
+            var prevId = parseInt(websites[websites.length-1]._id);
+            var id = prevId + 1;
+            var newWebsite = {_id: id, name: website.name, developerId: userId};
+            websites.push(newWebsite);
+            return id;
         }
 
         function  findWebsiteByUserId(userId) {
@@ -38,21 +42,26 @@
         }
 
         function  findWebsiteById(websiteId) {
-            var results = [];
             for(var w in websites){
                 if(websites[w]._id == websiteId){
-                    results.push(websites[w]);
+                    return websites[w];
                 }
             }
-            return results;
         }
 
         function  updateWebsite(websiteId, website) {
-
+            for(var w in websites){
+                if(websites[w]._id == websiteId){
+                    websites[w].name = website.name;
+                    break;
+                }
+            }
         }
 
         function  deleteWebsite(websiteId) {
-
+            websites.remove(function (w) {
+                return w._id == websiteId;
+            });
         }
     }
 
