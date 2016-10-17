@@ -62,13 +62,23 @@
         }
 
         function  updateUser(userId, user) {
-
+            for(var u in users){
+                if(users[u]._id == userId){
+                    users[u].username = user.username;
+                    users[u].password = user.password;
+                    users[u].firstName = user.firstName;
+                    users[u].lastName = user.lastName;
+                    break;
+                }
+            }
         }
 
         function  deleteUser(userId) {
-            users.remove(function (u) {
-                return u._id == userId;
-            });
+            for(var i = users.length-1;i--;){
+                if(users[i]._id == userId){
+                    users.splice(i,1);
+                }
+            }
         }
 
     }

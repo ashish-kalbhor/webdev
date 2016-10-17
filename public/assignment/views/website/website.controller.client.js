@@ -46,7 +46,7 @@
         if(websites != null){
             vm.websites = websites;
         }
-
+        vm.userId = userId;
         vm.deleteWebsite = deleteWebsite;
         vm.updateWebsite = updateWebsite;
 

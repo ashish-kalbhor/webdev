@@ -59,7 +59,11 @@
         }
 
         function  deleteWebsite(websiteId) {
-            websites.splice(_.indexOf(websites, _.findWhere(websites, {_id : websiteId})), 1);
+            for(var i = websites.length-1;i--;){
+                if(websites[i]._id == websiteId){
+                    websites.splice(i,1);
+                }
+            }
         }
     }
 

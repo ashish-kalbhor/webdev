@@ -52,13 +52,20 @@
         }
 
         function  updatePage(pageId, page) {
-
+            for(var p in pages){
+                if(pages[p]._id == pageId){
+                    pages[p].name = page.name;
+                    break;
+                }
+            }
         }
 
         function  deletePage(pageId) {
-            pages.remove(function (p) {
-                return p._id == pageId;
-            });
+            for(var i = pages.length-1;i--;){
+                if(pages[i]._id == pageId){
+                    pages.splice(i,1);
+                }
+            }
         }
     }
 
