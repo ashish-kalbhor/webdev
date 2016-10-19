@@ -41,7 +41,7 @@
                 controllerAs: "model"
             })
             .when("/user/:uid/website/:wid/page/new", {
-                templateUrl: "views/pages/pages-new.view.client.html",
+                templateUrl: "views/pages/page-new.view.client.html",
                 controller: "NewPageController",
                 controllerAs: "model"
             })

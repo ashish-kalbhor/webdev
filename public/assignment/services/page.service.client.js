@@ -42,13 +42,11 @@
         }
 
         function  findPageById(pageId) {
-            var results = [];
             for(var p in pages){
                 if(pages[p]._id == pageId){
-                    results.push(pages[p]);
+                    return pages[p];
                 }
             }
-            return results;
         }
 
         function  updatePage(pageId, page) {
