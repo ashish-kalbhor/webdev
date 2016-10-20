@@ -15,33 +15,57 @@
         ];
 
         var api = {
-            "createWidget" : "createWidget",
-            "findWidgetsByPageId" : "findWidgetsByPageId",
-            "findWidgetById" : "findWidgetById",
-            "updateWidget" : "updateWidget",
-            "deleteWidget" : "deleteWidget"
+            createWidget : createWidget,
+            findWidgetsByPageId : findWidgetsByPageId,
+            findWidgetById : findWidgetById,
+            updateWidget : updateWidget,
+            deleteWidget : deleteWidget
         };
 
         return api;
 
         function  createWidget(pageId, widget) {
-
+            var prevId = parseInt(widgets[widgets.length-1]._id);
+            var id = prevId + 1;
+            var newWidget = {_id: id, widgetType: widget.type, pageId: widget.pageId, text: widget.text};
+            widgets.push(newWidget);
+            return id;
         }
 
         function  findWidgetsByPageId(pageId) {
-
+            var results = [];
+            for(var w in widgets){
+                if(widgets[w].pageId == pageId){
+                    results.push(widgets[w]);
+                }
+            }
+            return results;
         }
 
         function  findWidgetById(widgetId) {
-
+            for(var w in widgets){
+                if(widgets[w]._id == widgetId){
+                    return widgets[w];
+                }
+            }
         }
 
-        function  updateWidget(widgetId, Widget) {
-
+        function  updateWidget(widgetId, widget) {
+            for(var w in widgets){
+                if(widgets[w]._id == widgetId){
+                    widgets[w].widgetType = widget.widgetType;
+                    widgets[w].text = widget.text;
+                    break;
+                }
+            }
         }
 
         function  deleteWidget(widgetId) {
-
+            for(var i = widgets.length-1;i--;){
+                if(widgets[i]._id == widgetId){
+                    widgets.splice(i,1);
+                }
+            }
         }
     }
 
