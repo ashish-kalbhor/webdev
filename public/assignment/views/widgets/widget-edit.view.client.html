@@ -1,0 +1,66 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="row container-fluid">
+        <div class="col-xs-4 hidden-xs">
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-font navbar-link" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-header">
+                <li><a class="navbar-font">Widgets</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right pull-right">
+                <li><a class="navbar-font" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/new"><span class="glyphicon glyphicon-plus"></span></a></li>
+            </ul>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <ul class="nav navbar-nav">
+                <li><a class="navbar-font navbar-link visible-xs" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-header">
+                <li><a class="navbar-font">Edit Widget</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right pull-right">
+                <li><a ng-click="model.updateWidget()" class="navbar-font" href=""><span class="glyphicon glyphicon-ok"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="col-xs-4 hidden-xs divider-right">
+    <div class="row container-fluid">
+        <ul class="list-group">
+            <li ng-repeat="widget in model.widgets" class="list-group-item">
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+                    {{widget.widgetType}}
+                </a>
+                <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}" class="pull-right">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<div class="col-xs-12 col-sm-8">
+    <form class="padding-left-12">
+        <form>
+            <div ng-include="'views/widgets/widget-'+model.editableWidget.widgetType+'-editor.view.client.html'"></div>
+        </form>
+        <a ng-click="model.deleteWidget(model.editableWidget._id)" class="btn btn-danger btn-block" href="">Delete Widget</a>
+    </form>
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-font" href="#"><span class="glyphicon glyphicon-play"></span></a></li>
+        </ul>
+        <ul class="nav navbar-nav">
+            <li><a class="navbar-font" href="#"><span class="glyphicon glyphicon-eye-open"></span></a></li>
+        </ul>
+        <ul class="nav navbar-nav navbar-right pull-right">
+            <li><a class="navbar-font" href="#/user/{{model.userId}}"><span class="glyphicon glyphicon-user"></span></a></li>
+        </ul>
+    </div>
+</nav>
