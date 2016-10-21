@@ -44,7 +44,7 @@
 <div class="col-xs-12 col-sm-8">
     <form class="padding-left-12">
         <form>
-            <div ng-include="'views/widgets/widget-'+model.editableWidget.widgetType+'-editor.view.client.html'"></div>
+            <div ng-include="'views/widgets/widget-' + model.editableWidget.widgetType.toLowerCase() + '-editor.view.client.html'"></div>
         </form>
         <a ng-click="model.deleteWidget(model.editableWidget._id)" class="btn btn-danger btn-block" href="">Delete Widget</a>
     </form>

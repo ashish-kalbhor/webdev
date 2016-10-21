@@ -1,1 +1,21 @@
-<h1>Youtube Editor</h1>
+<div class="container-fluid">
+    <form>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input ng-model="model.widget.name" type="text" class="form-control" id="name" placeholder="Widget name"/>
+        </div>
+        <div class="form-group">
+            <label for="text">Text</label>
+            <input ng-model="model.widget.text" type="text" class="form-control" id="text" placeholder="Widget text"/>
+        </div>
+        <div class="form-group">
+            <label for="url">URL</label>
+            <input ng-model="model.widget.url" type="url" class="form-control" id="url" placeholder="https://youtu.be/"/>
+        </div>
+        <div class="form-group">
+            <label for="size">Width</label>
+            <input ng-model="model.widget.width" type="text" class="form-control" id="size" placeholder="100%"/>
+        </div>
+        <a ng-click="model.deleteWidget()" class="btn btn-danger btn-block" >Delete</a>
+    </form>
+</div>
