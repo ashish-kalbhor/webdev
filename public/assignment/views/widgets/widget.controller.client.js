@@ -45,6 +45,7 @@
         function addWidget(widgetType) {
             var newWidget = {"widgetType": widgetType, "text": "Random new widget text"};
             vm.widgetId = WidgetService.createWidget(vm.pageId, newWidget);
+            console.log("created " + vm.widgetId);
             $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
         }
     }
@@ -60,7 +61,6 @@
         vm.updateWidget = updateWidget;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetsByPageId(vm.pageId);
             vm.editableWidget = WidgetService.findWidgetById(vm.widgetId);
         }
         init();

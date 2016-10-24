@@ -33,12 +33,16 @@
             <div ng-switch-when="HTML">
                 <div ng-bind-html="model.checkSafeHtml(widget.text)"></div>
             </div>
-            <div ng-switch-when="IMAGE">
-                <img width="{{widget.width}}" ng-src="{{widget.url}}"/>
+            <div ng-switch-when="IMAGE" class="container-fluid">
+                <img    class="img-responsive"
+                        width="{{widget.width}}"
+                        ng-src="{{widget.url}}"
+                        alt="Sample Image"/>
             </div>
-            <div ng-switch-when="YOUTUBE" class="youtube-widget">
-                <iframe width="{{widget.width}}"
-                        ng-src="{{model.checkSafeYouTubeUrl(widget.url)}}" frameborder="0" allowfullscreen></iframe>
+            <div ng-switch-when="YOUTUBE" class="embed-responsive embed-responsive-4by3 youtube-widget">
+                <iframe class="embed-responsive-item" width="{{widget.width}}"
+                        ng-src="{{model.checkSafeYouTubeUrl(widget.url)}}"
+                        frameborder="0" allowfullscreen></iframe>
             </div>
             <div ng-switch-default>
                 Unable to render widget
