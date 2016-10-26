@@ -8,62 +8,104 @@
 
     function PageListController($routeParams, PageService) {
         var vm = this;
-        var userId = parseInt($routeParams['uid']);
-        var websiteId = parseInt($routeParams['wid']);
-        vm.pages = PageService.findPageByWebsiteId(websiteId);
-        vm.userId = userId;
-        vm.websiteId = websiteId;
+        vm.userId = parseInt($routeParams['uid']);
+        vm.websiteId = parseInt($routeParams['wid']);
+
+        PageService
+            .findPageByWebsiteId(vm.websiteId)
+            .success(function (pages) {
+                vm.pages = pages;
+            })
+            .error(function () {
+
+            });
     }
 
     function NewPageController($routeParams, $location, PageService) {
         var vm = this;
-        var userId = parseInt($routeParams['uid']);
-        var websiteId = parseInt($routeParams['wid']);
-        vm.pages = PageService.findPageByWebsiteId(websiteId);
-        vm.userId = userId;
-
+        vm.userId = parseInt($routeParams['uid']);
+        vm.websiteId = parseInt($routeParams['wid']);
         vm.createPage = createPage;
+
+        function init() {
+            PageService
+                .findPageByWebsiteId(vm.websiteId)
+                .success(function (pages) {
+                    vm.pages = pages;
+                })
+                .error(function () {
+
+                });
+        }
+
+        init();
 
         function createPage(newPage) {
             if(newPage == null || newPage.name == null){
                 vm.error = "Enter Page name to create one !";
             }else {
-                PageService.createPage(websiteId, newPage)
-                $location.url("/user/" + userId + "/website/" + websiteId + "/page/");
+                PageService
+                    .createPage(vm.websiteId, newPage)
+                    .success(function () {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/");
+                    })
+                    .error(function () {
+
+                    });
             }
         }
     }
 
     function EditPageController($location, $routeParams, PageService) {
         var vm = this;
-        var userId = parseInt($routeParams['uid']);
-        var websiteId = parseInt($routeParams['wid']);
+        vm.userId = parseInt($routeParams['uid']);
+        vm.websiteId = parseInt($routeParams['wid']);
         var pageId = parseInt($routeParams['pid']);
-
-        var pages = PageService.findPageByWebsiteId(websiteId);
-        var editablePage = PageService.findPageById(pageId);
-
-        if(editablePage != null){
-            vm.editablePage = editablePage;
-        }
-
-        if(pages != null){
-            vm.pages = pages;
-        }
-
-        vm.userId = userId;
-        vm.websiteId = websiteId;
         vm.deletePage = deletePage;
         vm.updatePage = updatePage;
 
+        init();
+
+        function init() {
+            PageService
+                .findPageByWebsiteId(vm.websiteId)
+                .success(function (pages) {
+                    vm.pages = pages;
+                })
+                .error(function () {
+
+                });
+
+            PageService
+                .findPageById(pageId)
+                .success(function (page) {
+                    vm.editablePage = page;
+                })
+                .error(function () {
+
+                });
+        }
+
         function deletePage(pageId) {
-            PageService.deletePage(pageId);
-            $location.url("/user/" + userId + "/website/" + websiteId + "/page");
+            PageService
+                .deletePage(pageId)
+                .success(function () {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                })
+                .error(function () {
+
+                });
         }
 
         function updatePage(pageId, page) {
-            PageService.updatePage(pageId, page);
-            $location.url("/user/" + userId + "/website/" + websiteId + "/page");
+            PageService
+                .updatePage(pageId, page)
+                .success(function () {
+                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                })
+                .error(function () {
+
+                });
         }
     }
 

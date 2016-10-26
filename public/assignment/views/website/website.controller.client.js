@@ -8,56 +8,100 @@
 
     function WebsiteListController($routeParams, WebsiteService) {
         var vm = this;
-        var userId = parseInt($routeParams['uid']);
-        vm.websites = WebsiteService.findWebsiteByUserId(userId);
-        vm.userId = userId;
+        vm.userId = parseInt($routeParams['uid']);
+
+        WebsiteService
+            .findWebsiteByUserId(vm.userId)
+            .success(function (websites) {
+                vm.websites = websites;
+            })
+            .error(function () {
+
+            });
     }
 
     function NewWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
-        var userId = parseInt($routeParams['uid']);
-        vm.websites = WebsiteService.findWebsiteByUserId(userId);
-        vm.userId = userId;
-
+        vm.userId = parseInt($routeParams['uid']);
         vm.createWebsite = createWebsite;
+
+        function init() {
+            WebsiteService
+                .findWebsiteByUserId(vm.userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                })
+                .error(function () {
+
+                });
+        }
+        init();
 
         function createWebsite(website) {
             if(website == null || website.name == null){
-                vm.error = "Enter Website name to create one !";
+                vm.error = "Enter Website name to create one!";
             }else {
-                WebsiteService.createWebsite(userId, website);
-                $location.url("/user/" + userId + "/website");
+                WebsiteService
+                    .createWebsite(vm.userId, website)
+                    .success(function (website) {
+                        console.log("created " + website.name);
+                        $location.url("/user/" + vm.userId + "/website");
+                    })
+                    .error(function () {
+
+                    });
             }
         }
     }
 
     function EditWebsiteController($location, $routeParams, WebsiteService) {
         var vm = this;
-        var userId = parseInt($routeParams['uid']);
+        vm.userId = parseInt($routeParams['uid']);
         var websiteId = parseInt($routeParams['wid']);
-
-        var websites = WebsiteService.findWebsiteByUserId(userId);
-        var editableWebsite = WebsiteService.findWebsiteById(websiteId);
-
-        if(editableWebsite != null){
-            vm.editableWebsite = editableWebsite;
-        }
-
-        if(websites != null){
-            vm.websites = websites;
-        }
-        vm.userId = userId;
         vm.deleteWebsite = deleteWebsite;
         vm.updateWebsite = updateWebsite;
 
+        function init() {
+            WebsiteService
+                .findWebsiteByUserId(vm.userId)
+                .success(function (websites) {
+                    vm.websites = websites;
+                })
+                .error(function () {
+
+                });
+
+            WebsiteService
+                .findWebsiteById(websiteId)
+                .success(function (website) {
+                    vm.editableWebsite = website;
+                })
+                .error(function () {
+
+                });
+        }
+        init();
+
         function deleteWebsite(websiteId) {
-            WebsiteService.deleteWebsite(websiteId);
-            $location.url("/user/" + userId + "/website");
+            WebsiteService
+                .deleteWebsite(websiteId)
+                .success(function () {
+                    $location.url("/user/" + vm.userId + "/website");
+                })
+                .error(function () {
+
+                });
         }
 
         function updateWebsite(websiteId, website) {
-            WebsiteService.updateWebsite(websiteId, website);
-            $location.url("/user/" + userId + "/website");
+            WebsiteService
+                .updateWebsite(websiteId, website)
+                .success(function () {
+                    $location.url("/user/" + vm.userId + "/website");
+                })
+                .error(function () {
+
+                });
         }
 
     }
