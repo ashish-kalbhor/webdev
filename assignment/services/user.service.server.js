@@ -9,6 +9,8 @@ module.exports = function (app) {
     app.post('/api/user', createUser);
     app.get('/api/user', findUser);
     app.get('/api/user/:uid', findUserById);
+    app.put('/api/user/:uid', updateUser);
+    app.delete('/api/user/:uid', deleteUser);
 
     function createUser(req, res) {
         var user = req.body;
@@ -58,6 +60,33 @@ module.exports = function (app) {
         for(var u in users){
             if(users[u]._id == userId){
                 res.send(users[u]);
+                return;
+            }
+        }
+        res.send('0');
+    }
+
+    function  updateUser(req, res) {
+        var userId = req.params.uid;
+        var newUser = req.body;
+        for(var u in users){
+            if(users[u]._id == userId){
+                users[u].username = newUser.username;
+                users[u].password = newUser.password;
+                users[u].firstName = newUser.firstName;
+                users[u].lastName = newUser.lastName;
+                res.send(newUser);
+                return;
+            }
+        }
+        res.send('0');
+    }
+
+    function  deleteUser(req, res) {
+        var userId = req.params.uid;
+        for(var i = users.length-1;i--;){
+            if(users[i]._id == userId){
+                users.splice(i,1);
                 return;
             }
         }
