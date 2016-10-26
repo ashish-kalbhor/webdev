@@ -9,7 +9,25 @@ module.exports = function (app) {
     app.get('/api/user', findUser);
 
     function findUser(req, res) {
+        var params = req.params;
+        var query = req.query;
 
+        if(query.password && query.username){
+            findUserByCredentials(req, res);
+        }else if(query.username) {
+            findUserByUsername(req, res);
+        }
+    }
+
+    function findUserByUsername(req, res) {
+        var username = req.query.username;
+        for(var u in users){
+            if(users[u].username === username){
+                res.send(users[u]);
+                return;
+            }
+        }
+        res.send(0);
     }
 
 };
