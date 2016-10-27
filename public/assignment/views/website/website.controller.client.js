@@ -44,7 +44,6 @@
                 WebsiteService
                     .createWebsite(vm.userId, website)
                     .success(function (website) {
-                        console.log("created " + website.name);
                         $location.url("/user/" + vm.userId + "/website");
                     })
                     .error(function () {

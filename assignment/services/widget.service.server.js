@@ -17,7 +17,10 @@ module.exports = function (app) {
 
     function createWidget(req, res) {
         var widget = req.body;
+        var pageId = req.params.pid;
         widget._id = (new Date()).getTime();
+        widget.pageId = pageId;
+        widget.size = "1";
         widgets.push(widget);
         res.send(widget);
     }

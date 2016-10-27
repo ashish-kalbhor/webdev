@@ -81,6 +81,7 @@
                 .findWidgetById(vm.widgetId)
                 .success(function (widget) {
                     vm.editableWidget = widget;
+                    console.log(vm.editableWidget.widgetType);
                 })
                 .error(function () {
 
