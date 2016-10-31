@@ -63,6 +63,7 @@ module.exports = function (app) {
         for(var i = websites.length-1;i--;){
             if(websites[i]._id == websiteId){
                 websites.splice(i,1);
+                res.sendStatus(200);
                 return;
             }
         }

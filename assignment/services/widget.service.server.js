@@ -65,6 +65,7 @@ module.exports = function (app) {
         for(var i = widgets.length-1;i--;){
             if(widgets[i]._id == widgetId){
                 widgets.splice(i,1);
+                res.sendStatus(200);
                 return;
             }
         }

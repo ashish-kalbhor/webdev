@@ -87,6 +87,7 @@ module.exports = function (app) {
         for(var i = users.length-1;i--;){
             if(users[i]._id == userId){
                 users.splice(i,1);
+                res.sendStatus(200);
                 return;
             }
         }
