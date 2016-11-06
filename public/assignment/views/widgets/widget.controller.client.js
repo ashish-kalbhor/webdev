@@ -24,6 +24,9 @@
                 .error(function () {
 
                 });
+            $(".wam-widgets").sortable(
+                {axis: "y"}
+            );
         }
 
         init();

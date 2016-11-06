@@ -13,8 +13,8 @@
     </div>
 </nav>
 
-<div class="container">
-     <div ng-repeat="widget in model.widgets">
+<div class="container" wamSortable>
+     <div ng-repeat="widget in model.widgets" class="jga-widget">
         <div class="widget-tools">
             <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
