@@ -5,7 +5,8 @@ module.exports = function (app) {
         {_id: "543", name: "Post 3", websiteId: "234"},
         {_id: "322", name: "Post 4", websiteId: "234"},
         {_id: "433", name: "Post 5", websiteId: "345"},
-        {_id: "544", name: "Post 6", websiteId: "345"}
+        {_id: "544", name: "Post 6", websiteId: "345"},
+        {_id: "545", name: "Post 7", websiteId: "123"}
     ];
 
     app.post('/api/website/:wid/page', createPage);
