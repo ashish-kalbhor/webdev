@@ -1,9 +1,9 @@
 (function () {
     angular
-        .module('jgaDirectives', [])
-        .directive('wamSortable', wamSortable);
+        .module('jga-directives', [])
+        .directive('jgaSortable', jgaSortable);
     
-    function wamSortable() {
+    function jgaSortable() {
         function linker(scope, element, attributes) {
             element.sortable({
                 axis: 'y',
@@ -12,21 +12,20 @@
                 },
                 stop: function(event, ui) {
                     final = $(ui.item).index();
-                    scope.wamSortableController.sort(initial, final);
+                    scope.jgaSortableController.sort(initial, final);
                 }
             });
         }
 
         return {
             scope: {},
-            restrict: 'C',
             link: linker,
-            controller: wamSortableController,
-            controllerAs: 'wamSortableController'
+            controller: jgaSortableController,
+            controllerAs: 'jgaSortableController'
         }
     }
 
-    function wamSortableController($routeParams, WidgetService) {
+    function jgaSortableController($routeParams, WidgetService) {
         var vm = this;
         vm.sort = sort;
 

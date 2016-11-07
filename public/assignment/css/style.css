@@ -101,3 +101,11 @@ a:hover {
     border-bottom-left-radius: 8px;
     opacity: 0.7;
 }
+
+.scroll-overflow-y
+{
+    overflow-y: scroll;
+    position: relative;
+    height: -moz-calc(100vh - 140px); /* Firefox -> 100vh - padding top - padding bottom*/
+    height: -webkit-calc(100vh - 140px); /* Chrome, Safari -> 100vh - padding top - padding bottom*/
+}

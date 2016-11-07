@@ -1,4 +1,4 @@
-<body>
+<body scroll-overflow-y>
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
         <ul class="nav navbar-nav navbar-right pull-left">
@@ -13,7 +13,7 @@
     </div>
 </nav>
 
-<div wamSortable class="container">
+<div jga-sortable class="container">
      <div ng-repeat="widget in model.widgets" ng-switch="widget.widgetType">
          <a class="pull-right"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
          <a class="pull-right" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
