@@ -1,8 +1,16 @@
-module.exports = function (app, model) {
+module.exports = function (app) {
 
-    var model = model;
+    var mime = require('mime');
     var multer = require('multer');
-    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+            cb(null, __dirname+'/../../public/uploads')
+        },
+        filename: function (req, file, cb) {
+            cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype));
+        }
+    });
+    var upload = multer({ storage: storage});
 
     var widgets = [
         { _id: "123", widgetType: "HEADER", pageId: "321", size: 2, text: "GIZMODO"},
@@ -84,10 +92,10 @@ module.exports = function (app, model) {
         var width         = req.body.width;
         var pageId        = req.body.pageId;
         var userId        = req.body.userId;
-        var websiteId        = req.body.websiteId;
+        var websiteId     = req.body.websiteId;
         var myFile        = req.file;
 
-        var originalname  = myFile.originalname; // file name on user's computer
+        var originalName  = myFile.originalname; // file name on user's computer
         var filename      = myFile.filename;     // new file name in upload folder
         var path          = myFile.path;         // full path of uploaded file
         var destination   = myFile.destination;  // folder where file is saved to
@@ -96,6 +104,8 @@ module.exports = function (app, model) {
 
         for(var i in widgets) {
             if (widgets[i]._id == widgetId) {
+                widgets[i].name = originalName;
+                widgets[i].width = width;
                 widgets[i].url = "/uploads/" + filename;
             }
         }
@@ -105,18 +115,22 @@ module.exports = function (app, model) {
             "/website/" + websiteId +
             "/page/" + pageId +
             "/widget/" + widgetId);
+
+        res.redirect("");
     }
 
-    function sortWidget() {
+    function sortWidget(req, res) {
         var pageId = req.params.pid;
-        var start = req.query['start'];
-        var end = req.query['end'];
+        var before = req.query.initial;
+        var after = req.query.final;
+
+        console.log("Sort widget at server: " + pageId + ".." + before + ".." + after);
 
         var spliceIndex = 0;
         var occurrences = 0;
         for (var w in widgets) {
             if (widgets[w].pageId == pageId) {
-                if (occurrences == start) {
+                if (occurrences == before) {
                     spliceIndex = parseInt(w);
                     break;
                 }
@@ -126,10 +140,11 @@ module.exports = function (app, model) {
             }
         }
 
+        // Updating widget positions
         occurrences = 0;
         for (var w in widgets) {
             if (widgets[w].pageId == pageId) {
-                if (occurrences == end) {
+                if (occurrences == after) {
                     widgets.splice(parseInt(w), 0, widgets.splice(spliceIndex, 1)[0]);
                     break;
                 }

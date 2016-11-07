@@ -1,41 +1,37 @@
 (function () {
     angular
-        .module("jga-directives", [])
-        .directive("wamSortable", wamSortable);
+        .module('jgaDirectives', [])
+        .directive('wamSortable', wamSortable);
     
     function wamSortable() {
-        var start = -1;
-        var end = -1;
         function linker(scope, element, attributes) {
             element.sortable({
                 axis: 'y',
                 start: function(event, ui) {
-                    start = $(ui.item).index();
+                    initial = $(ui.item).index();
                 },
                 stop: function(event, ui) {
-                    end = $(ui.item).index();
-                    if(start >= end){
-                        start --;
-                    }
-                    scope.sortController.sort(start, end);
+                    final = $(ui.item).index();
+                    scope.wamSortableController.sort(initial, final);
                 }
             });
         }
+
         return {
             scope: {},
             restrict: 'C',
             link: linker,
-            controller: sortController,
-            controllerAs: 'sortController'
+            controller: wamSortableController,
+            controllerAs: 'wamSortableController'
         }
     }
 
-    function sortController($routeParams, WidgetService) {
+    function wamSortableController($routeParams, WidgetService) {
         var vm = this;
         vm.sort = sort;
 
-        function sort(start, end) {
-            WidgetService.sortWidget($routeParams.pid, start, end);
+        function sort(initial, final) {
+            WidgetService.sortWidget($routeParams.pid, initial, final);
         }
     }
-});
+})();

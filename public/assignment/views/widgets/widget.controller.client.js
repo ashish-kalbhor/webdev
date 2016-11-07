@@ -24,9 +24,6 @@
                 .error(function () {
 
                 });
-            $(".wam-widgets").sortable(
-                {axis: "y"}
-            );
         }
 
         init();
@@ -54,16 +51,15 @@
         vm.addWidget = addWidget;
 
         function addWidget(widgetType) {
-            var newWidget = {"widgetType": widgetType, "text": "Random new widget text"};
 
             WidgetService
-                .createWidget(vm.pageId, newWidget)
+                .createWidget(vm.pageId, {"widgetType": widgetType})
                 .success(function (widget) {
                     vm.widgetId = widget._id;
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
                 })
-                .error(function () {
-
+                .error(function (error) {
+                    console.error(error);
                 });
 
         }
@@ -84,10 +80,9 @@
                 .findWidgetById(vm.widgetId)
                 .success(function (widget) {
                     vm.editableWidget = widget;
-                    console.log(vm.editableWidget.widgetType);
                 })
-                .error(function () {
-
+                .error(function (error) {
+                    console.error("Widget Controller:: " + error);
                 });
         }
         init();

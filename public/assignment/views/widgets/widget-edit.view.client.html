@@ -17,7 +17,8 @@
 </nav>
 
 <div
-        ng-include="'views/widgets/widget-' + model.editableWidget.widgetType.toLowerCase() + '-editor.view.client.html'">
+    ng-if='model.editableWidget.widgetType'
+    ng-include="'/assignment/views/widgets/widget-' + model.editableWidget.widgetType.toLowerCase() + '-editor.view.client.html'">
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

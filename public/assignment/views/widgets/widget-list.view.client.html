@@ -13,16 +13,13 @@
     </div>
 </nav>
 
-<div class="container" wamSortable>
-     <div ng-repeat="widget in model.widgets" class="jga-widget">
-        <div class="widget-tools">
-            <a href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
-                <span class="glyphicon glyphicon-cog"></span>
-            </a>
-            <span class="glyphicon glyphicon-align-justify"></span>
-        </div>
-        <div ng-switch="widget.widgetType">
-            <div ng-switch="widget.size" ng-switch-when="HEADER">
+<div wamSortable class="container">
+     <div ng-repeat="widget in model.widgets" ng-switch="widget.widgetType">
+         <a class="pull-right"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
+         <a class="pull-right" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
+             <span class="glyphicon glyphicon-cog"></span>
+         </a>
+         <div ng-switch="widget.size" ng-switch-when="HEADER">
                 <h1 ng-switch-when="1">{{widget.text}}</h1>
                 <h2 ng-switch-when="2">{{widget.text}}</h2>
                 <h3 ng-switch-when="3">{{widget.text}}</h3>
@@ -47,7 +44,6 @@
             <div ng-switch-default>
                 Unable to render widget
             </div>
-        </div>
     </div>
 </div>
 
