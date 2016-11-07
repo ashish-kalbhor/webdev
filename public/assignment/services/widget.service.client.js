@@ -42,7 +42,6 @@
         }
 
         function sortWidget(pageId, initial, final) {
-            console.log("calling sort from client for " + pageId);
             var url = "/api/page/" + pageId + "/widget?initial=" + initial + "&final=" + final;
             return $http.put(url);
         }
