@@ -2,9 +2,10 @@ module.exports = function (app) {
 
     var mime = require('mime');
     var multer = require('multer');
+
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
-            cb(null, __dirname+'/../../public/uploads')
+            cb(null, __dirname+'/../../public/assignment/uploads')
         },
         filename: function (req, file, cb) {
             cb(null, file.fieldname + '-' + Date.now() + '.' + mime.extension(file.mimetype));
@@ -95,6 +96,14 @@ module.exports = function (app) {
         var websiteId     = req.body.websiteId;
         var myFile        = req.file;
 
+        // if no file given
+        if (!myFile || !myFile.originalname) {
+            res.redirect("/assignment/#/user/" + userId +
+                "/website/" + websiteId +
+                "/page/" + pageId +
+                "/widget/" + widgetId);
+        }
+
         var originalName  = myFile.originalname; // file name on user's computer
         var filename      = myFile.filename;     // new file name in upload folder
         var path          = myFile.path;         // full path of uploaded file
@@ -106,25 +115,24 @@ module.exports = function (app) {
             if (widgets[i]._id == widgetId) {
                 widgets[i].name = originalName;
                 widgets[i].width = width;
-                widgets[i].url = "/uploads/" + filename;
+                widgets[i].url = "/assignment/uploads/" + filename;
+
+                res.redirect("/assignment/#/"
+                    + "user/" + userId +
+                    "/website/" + websiteId +
+                    "/page/" + pageId +
+                    "/widget/" + widgetId);
+                return;
             }
         }
 
-        res.redirect("/assignment/#/"
-            + "user/" + userId +
-            "/website/" + websiteId +
-            "/page/" + pageId +
-            "/widget/" + widgetId);
-
-        res.redirect("");
+        res.redirect("Something went wrong");
     }
 
     function sortWidget(req, res) {
         var pageId = req.params.pid;
         var before = req.query.initial;
         var after = req.query.final;
-
-        console.log("Sort widget at server: " + pageId + ".." + before + ".." + after);
 
         var spliceIndex = 0;
         var occurrences = 0;
