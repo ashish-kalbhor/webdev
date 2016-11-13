@@ -1,4 +1,6 @@
-module.exports = function (app) {
+module.exports = function (app, WebAppModels) {
+
+    var WidgetModel = WebAppModels.widgetModel;
 
     var mime = require('mime');
     var multer = require('multer');
@@ -43,49 +45,60 @@ module.exports = function (app) {
 
     function findAllWidgetsForPage(req, res) {
         var pageId = req.params.pid;
-        var results = [];
-        for(var w in widgets){
-            if(widgets[w].pageId == pageId){
-                results.push(widgets[w]);
-            }
-        }
-        res.send(results);
+        WidgetModel
+            .findAllWidgetsForPage(pageId)
+            .then(
+                function(widgets) {
+                    res.json(widgets);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
     }
 
     function findWidgetById(req, res) {
         var widgetId = req.params.wgid;
-        for(var w in widgets){
-            if(widgets[w]._id == widgetId){
-                res.send(widgets[w]);
-                return;
-            }
-        }
-        res.send('0');
+        WidgetModel
+            .findWidgetById(widgetId)
+            .then(
+                function(widget) {
+                    res.send(widget);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
     }
 
     function  updateWidget(req, res) {
         var widgetId = req.params.wgid;
         var newWidget = req.body;
-        for(var w in widgets){
-            if(widgets[w]._id == widgetId){
-                widgets[w] = newWidget;
-                res.send(newWidget);
-                return;
-            }
-        }
-        res.send('0');
+
+        WidgetModel
+            .updateWidget(widgetId, newWidget)
+            .then(
+                function(data) {
+                    res.send(200);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
     }
 
     function  deleteWidget(req, res) {
         var widgetId = req.params.wgid;
-        for(var i = widgets.length-1;i--;){
-            if(widgets[i]._id == widgetId){
-                widgets.splice(i,1);
-                res.sendStatus(200);
-                return;
-            }
-        }
-        res.send('0');
+        WidgetModel
+            .deleteWidget(widgetId)
+            .then(
+                function(data) {
+                    res.send(200);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            )
     }
 
     function uploadImage(req, res) {
