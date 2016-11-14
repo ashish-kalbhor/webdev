@@ -1,7 +1,6 @@
 module.exports = function () {
-
-    var PageSchema = require("../page/page.schema.server");
     var mongoose = require("mongoose");
+    var PageSchema = require("../page/page.schema.server")(mongoose);
     var WebsiteSchema = mongoose.Schema({
         _user: {type: mongoose.Schema.ObjectId, ref: "User"},
         name: {type: String, required: true},

@@ -15,7 +15,7 @@ module.exports = function (app, WebAppModels) {
             .createUser(user)
             .then(
                 function (user) {
-                    res.json(user);
+                    res.send(user);
                 },
                 function (error) {
                     res.statusCode(400).send(error);
@@ -40,7 +40,7 @@ module.exports = function (app, WebAppModels) {
             .findUserByUsername(username)
             .then(
                 function (user) {
-                    res.json(user);
+                    res.send(user);
                 },
                 function (error) {
                     res.statusCode(404).send(error);
@@ -56,7 +56,7 @@ module.exports = function (app, WebAppModels) {
             .findUserByCredentials(username, password)
             .then(
                 function (user) {
-                    res.json(user);
+                    res.send(user);
                 },
                 function (error) {
                     res.statusCode(404).send(error);
@@ -87,7 +87,7 @@ module.exports = function (app, WebAppModels) {
             .updateUser(userId, newUser)
             .then(
                 function (data) {
-                    res.send(200);
+                    res.sendStatus(200).send(data);
                 },
                 function (error) {
                     res.statusCode(500).send(error);
@@ -103,7 +103,7 @@ module.exports = function (app, WebAppModels) {
             .deleteUser(userId)
             .then(
                 function (data) {
-                    res.send(200);
+                    res.sendStatus(200).send(data);
                 },
                 function (error) {
                     res.statusCode(500).send(error);

@@ -33,7 +33,7 @@ module.exports = function () {
     function updateUser(userId, user) {
         return User.update(
             {_id: userId},
-            {$set: {firstName: user.firstName, lastName: user.lastName}}
+            {$set: user}
         );
     }
 

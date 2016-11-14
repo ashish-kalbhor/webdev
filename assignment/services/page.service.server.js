@@ -16,7 +16,7 @@ module.exports = function (app, WebAppModels) {
             .createPage(websiteId, page)
             .then(
                 function (page) {
-                    res.json(page);
+                    res.send(page);
                 },
                 function (error){
                     res.statusCode(400).send(error);
@@ -31,7 +31,7 @@ module.exports = function (app, WebAppModels) {
             .findAllPagesForWebsite(websiteId)
             .then(
                 function (pages) {
-                    res.json(pages);
+                    res.send(pages);
                 },
                 function(err) {
                     res.statusCode(404).send(err);

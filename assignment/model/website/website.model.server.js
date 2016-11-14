@@ -29,7 +29,7 @@ module.exports = function () {
     function updateWebsite(websiteId, website) {
         return Website.update(
             {_id: websiteId},
-            {$set: {name: website.name, description: website.description}}
+            {$set: website}
         );
     }
 

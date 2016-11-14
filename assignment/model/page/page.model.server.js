@@ -29,7 +29,7 @@ module.exports = function () {
     function updatePage(pageId, page) {
         return Page.update(
             {_id: pageId},
-            {$set: {name: page.name, title: page.title}}
+            {$set: page}
         );
     }
 

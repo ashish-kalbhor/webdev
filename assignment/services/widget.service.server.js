@@ -49,7 +49,7 @@ module.exports = function (app, WebAppModels) {
             .findAllWidgetsForPage(pageId)
             .then(
                 function(widgets) {
-                    res.json(widgets);
+                    res.send(widgets);
                 },
                 function(error) {
                     res.statusCode(404).send(error);

@@ -16,7 +16,7 @@ module.exports = function (app, WebAppModels) {
             .createWebsiteForUser(userId, website)
             .then(
                 function (website) {
-                    res.json(website);
+                    res.send(website);
                 },
                 function (error){
                     res.statusCode(400).send(error);
@@ -32,7 +32,7 @@ module.exports = function (app, WebAppModels) {
             .findAllWebsitesForUser(userId)
             .then(
                 function (websites) {
-                    res.json(websites);
+                    res.send(websites);
                 },
                 function(err) {
                     res.statusCode(404).send(err);
