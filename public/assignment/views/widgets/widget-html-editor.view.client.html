@@ -2,11 +2,18 @@
     <form>
         <div class="form-group">
             <label for="name">Name</label>
-            <input ng-model="model.editableWidget.widgetType" type="text" class="form-control" id="name" placeholder="Widget name"/>
+            <input ng-model="model.editableWidget.widgetType"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Widget name"/>
         </div>
         <div class="form-group">
             <label for="text">Text</label>
-            <input ng-model="model.editableWidget.text" type="text" class="form-control" id="text"/>
+            <input ng-model="model.editableWidget.text"
+                   type="text"
+                   class="form-control"
+                   id="text"/>
         </div>
         <a ng-click="model.deleteWidget()" class="btn btn-danger btn-block">Delete</a>
     </form>
