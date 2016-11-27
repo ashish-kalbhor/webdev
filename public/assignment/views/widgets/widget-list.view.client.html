@@ -14,7 +14,7 @@
 </nav>
 
 <div jga-sortable class="container">
-     <div ng-repeat="widget in model.widgets" ng-switch="widget.widgetType">
+     <div ng-repeat="widget in model.widgets" ng-switch="widget.type">
          <a class="pull-right"><span class="glyphicon glyphicon-menu-hamburger"></span></a>
          <a class="pull-right" href="#/user/{{model.userId}}/website/{{model.websiteId}}/page/{{model.pageId}}/widget/{{widget._id}}">
              <span class="glyphicon glyphicon-cog"></span>
