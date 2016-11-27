@@ -134,38 +134,35 @@ module.exports = function (app, WebAppModels) {
     }
 
     function sortWidget(req, res) {
-        /*var pageId = req.params.pid;
-        var before = req.query.initial;
-        var after = req.query.final;
+        var pageId = parseInt(req.params.pageId);
+        var initial = parseInt(req.query.initial);
+        var final = parseInt(req.query.final);
 
-        var spliceIndex = 0;
-        var occurrences = 0;
+        // Find and store start position in widgets array
+        var newStartIndex = -1;
+        var newEndIndex = -1;
+        var count = 0;
+
         for (var w in widgets) {
             if (widgets[w].pageId == pageId) {
-                if (occurrences == before) {
-                    spliceIndex = parseInt(w);
-                    break;
+                if (count == initial) {
+                    newStartIndex = parseInt(w);
+                    if (newEndIndex != -1) {
+                        break;
+                    }
                 }
-                else {
-                    occurrences++;
+                if (count == final) {
+                    newEndIndex = parseInt(w);
+                    if (newStartIndex != -1) {
+                        break;
+                    }
                 }
+                count++;
             }
         }
 
-        // Updating widget positions
-        occurrences = 0;
-        for (var w in widgets) {
-            if (widgets[w].pageId == pageId) {
-                if (occurrences == after) {
-                    widgets.splice(parseInt(w), 0, widgets.splice(spliceIndex, 1)[0]);
-                    break;
-                }
-                else {
-                    occurrences++;
-                }
-            }
-        }
-        res.sendStatus(200);    //done*/
+        widgets.splice(parseInt(newEndIndex), 0, widgets.splice(newStartIndex, 1)[0]);
+        res.sendStatus(200);
     }
 
 };
