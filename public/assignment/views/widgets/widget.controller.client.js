@@ -51,8 +51,7 @@
         vm.addWidget = addWidget;
 
         function addWidget(widgetType) {
-	    console.log("Widget type requested " + widgetType);
-            WidgetService
+	        WidgetService
                 .createWidget(vm.pageId, {"type": widgetType})
                 .success(function (widget) {
                     vm.widgetId = widget._id;

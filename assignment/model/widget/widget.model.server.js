@@ -16,8 +16,7 @@ module.exports = function () {
 
     function createWidget(pageId, widget) {
         widget._page = pageId;
-	console.log("Created Widget " + widget);
-        return Widget.create(widget);
+	    return Widget.create(widget);
     }
 
     function findAllWidgetsForPage(pageId) {
@@ -40,6 +39,16 @@ module.exports = function () {
     }
 
     function reorderWidget(pageId, start, end) {
-
+        return Widget
+                .findPageById(pageId)
+                .then(function(page){
+                    var widget = page.widgets.splice(start,1)[0];
+                    page.save();
+                    page.widgets.splice(end, 0, widget);
+                    return page.save();
+                },
+                    function(err){
+                        console.log(err);
+                });
     }
 };

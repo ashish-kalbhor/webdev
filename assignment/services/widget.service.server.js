@@ -35,12 +35,10 @@ module.exports = function (app, WebAppModels) {
             .createWidget(pageId, widget)
             .then(
                 function (newWidget) {
-		    console.log("Success and found " + newWidget);
-                    res.send(newWidget);
+	               res.send(newWidget);
                 },
                 function (err) {
-		    console.log("Error in creating widget " + err);
-                    res.sendStatus(400).send(err);
+	                res.sendStatus(400).send(err);
                 }
             );
     }
@@ -127,54 +125,40 @@ module.exports = function (app, WebAppModels) {
         var size          = myFile.size;
         var mimetype      = myFile.mimetype;
 
-        for(var i in widgets) {
-            if (widgets[i]._id == widgetId) {
-                widgets[i].name = originalName;
-                widgets[i].width = width;
-                widgets[i].url = "/assignment/uploads/" + filename;
+        var url = "/assignment/uploads/" + filename;
 
-                res.redirect("/assignment/#/"
-                    + "user/" + userId +
-                    "/website/" + websiteId +
-                    "/page/" + pageId +
-                    "/widget/" + widgetId);
-                return;
-            }
-        }
+        var widget = {};
+        widget._id = widgetId;
+        widget._name = originalname;
+        widget.width = width;
+        widget.url = url;
 
-        res.redirect("Something went wrong");
+        WidgetModel
+            .updateWidget(widgetId, widget)
+            .then(function (status) {
+                    res.redirect("/assignment/#/user/" + userId +
+                        "/website/" + websiteId +
+                        "/page/" + pageId +
+                        "/widget/" + widgetId);
+                },
+                function (err) {
+                    res.sendStatus(400).send(err);
+                });
     }
 
     function sortWidget(req, res) {
-        var pageId = parseInt(req.params.pageId);
+        var pageId = req.params.pageId;
         var initial = parseInt(req.query.initial);
         var final = parseInt(req.query.final);
 
-        // Find and store start position in widgets array
-        var newStartIndex = -1;
-        var newEndIndex = -1;
-        var count = 0;
-
-        for (var w in widgets) {
-            if (widgets[w].pageId == pageId) {
-                if (count == initial) {
-                    newStartIndex = parseInt(w);
-                    if (newEndIndex != -1) {
-                        break;
-                    }
-                }
-                if (count == final) {
-                    newEndIndex = parseInt(w);
-                    if (newStartIndex != -1) {
-                        break;
-                    }
-                }
-                count++;
-            }
-        }
-
-        widgets.splice(parseInt(newEndIndex), 0, widgets.splice(newStartIndex, 1)[0]);
-        res.sendStatus(200);
+        WidgetModel
+            .reorderWidget(pageId, initial, final)
+            .then(function (status) {
+                    res.sendStatus(200);
+                },
+                function (err) {
+                    res.sendStatus(400).send(err);
+                });
     }
 
 };
