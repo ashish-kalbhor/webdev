@@ -5,7 +5,7 @@
         </div>
         <div class="form-group" ng-class="{'has-error':model.nameError}">
             <label for="name">Name</label>
-            <input ng-model="model.widget.name"
+            <input ng-model="model.editableWidget.name"
                    type="text"
                    class="form-control"
                    id="name"
@@ -13,7 +13,7 @@
         </div>
         <div class="form-group">
             <label for="text">Text</label>
-            <input ng-model="model.widget.text"
+            <input ng-model="model.editableWidget.text"
                    type="text"
                    class="form-control"
                    id="text"
@@ -21,7 +21,7 @@
         </div>
         <div class="form-group">
             <label for="rows">Rows</label>
-            <input ng-model="model.widget.rows"
+            <input ng-model="model.editableWidget.rows"
                    type="number"
                    class="form-control"
                    id="rows"
@@ -29,7 +29,7 @@
         </div>
         <div class="form-group">
             <label for="placeholder">Placeholder</label>
-            <input ng-model="model.widget.placeholder"
+            <input ng-model="model.editableWidget.placeholder"
                    type="text"
                    class="form-control"
                    id="placeholder"
@@ -38,7 +38,7 @@
         <div class="form-group input-group">
             <input type="text" readonly value="Formatted" class="form-control white"/>
             <span class="input-group-addon">
-                <input ng-model="model.widget.formatted" type="checkbox" id="formatted"/>
+                <input ng-model="model.editableWidget.formatted" type="checkbox" id="formatted"/>
             </span>
         </div>
     </form>
