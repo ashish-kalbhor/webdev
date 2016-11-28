@@ -26,11 +26,20 @@ module.exports = function (app, WebAppModels) {
     function createWidget(req, res) {
         var widget = req.body;
         var pageId = req.params.pid;
-        widget._id = (new Date()).getTime();
-        widget.pageId = pageId;
-        widget.size = "1";
-        widgets.push(widget);
-        res.send(widget);
+
+        if (widget.type === "YOUTUBE" && !widget.width) {
+            widget.width = "100%";
+        }
+        WidgetModel
+            .createWidget(pageId, widget)
+            .then(
+                function (newWidget) {
+                    res.send(newWidget);
+                },
+                function (err) {
+                    res.sendStatus(400).send(err);
+                }
+            );
     }
 
     function findAllWidgetsForPage(req, res) {
