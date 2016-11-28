@@ -16,6 +16,7 @@ module.exports = function () {
 
     function createWidget(pageId, widget) {
         widget._page = pageId;
+	console.log("Created Widget " + widget);
         return Widget.create(widget);
     }
 
