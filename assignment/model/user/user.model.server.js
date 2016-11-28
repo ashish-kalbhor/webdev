@@ -1,16 +1,19 @@
 module.exports = function () {
 
+    var models = {};
     var mongoose = require("mongoose");
     var UserSchema = require("./user.schema.server")();
     var User = mongoose.model("User", UserSchema);
 
     var api = {
+        setModels: setModels,
         createUser: createUser,
         findUserById: findUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials,
         updateUser: updateUser,
-        deleteUser: deleteUser
+        deleteUser: deleteUser,
+        deleteWebsiteReference: deleteWebsiteReference
     };
     return api;
 
@@ -39,5 +42,15 @@ module.exports = function () {
 
     function deleteUser(userId) {
         return User.remove({_id: userId});
+    }
+    
+    function setModels(_models) {
+        models = _models;
+    }
+    
+    function deleteWebsiteReference(userId, websiteId) {
+        return User.update(
+                {_id: userId},
+                {$pull: {websites: websiteId}});
     }
 };

@@ -1,15 +1,18 @@
 module.exports = function () {
 
+    var models = {};
     var mongoose = require("mongoose");
     var PageSchema = require("./page.schema.server")();
     var Page = mongoose.model("Page", PageSchema);
 
     var api = {
+        setModels: setModels,
         createPage: createPage,
         findAllPagesForWebsite: findAllPagesForWebsite,
         findPageById: findPageById,
         updatePage: updatePage,
-        deletePage: deletePage
+        deletePage: deletePage,
+        deleteWidgetReference: deleteWidgetReference
     };
     return api;
 
@@ -35,5 +38,15 @@ module.exports = function () {
 
     function deletePage(pageId) {
         return Page.remove({_id: pageId});
+    }
+
+    function setModels(_models) {
+        models = _models;
+    }
+
+    function deleteWidgetReference(pageId, widgetId) {
+        return Page.update(
+                {_id: pageId},
+                {$pull: {widgets: widgetId}});
     }
 };

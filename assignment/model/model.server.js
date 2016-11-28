@@ -13,12 +13,22 @@ module.exports = function () {
     //mongoose.connect("mongodb://localhost/cs5610-assignment");
     mongoose.connect(connectionString);
 
+    var userModel = require("./user/user.model.server")();
+    var websiteModel = require("./website/website.model.server")();
+    var pageModel = require("./page/page.model.server")();
+    var widgetModel = require("./widget/widget.model.server")();
+
     var models = {
-        userModel: require("./user/user.model.server")(),
-        websiteModel: require("./website/website.model.server")(),
-        pageModel: require("./page/page.model.server")(),
-        widgetModel: require("./widget/widget.model.server")()
+        userModel: userModel,
+        websiteModel: websiteModel,
+        pageModel: pageModel,
+        widgetModel: widgetModel
     };
+
+    userModel.setModels(models);
+    websiteModel.setModels(models);
+    pageModel.setModels(models);
+    widgetModel.setModels(models);
 
     return models;
 };

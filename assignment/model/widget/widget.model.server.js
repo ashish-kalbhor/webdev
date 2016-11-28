@@ -1,10 +1,12 @@
 module.exports = function () {
 
+    var models = {};
     var mongoose = require("mongoose");
     var WidgetSchema = require("./widget.schema.server")();
     var Widget = mongoose.model("Widget", WidgetSchema);
 
     var api = {
+        setModels: setModels,
         createWidget: createWidget,
         findAllWidgetsForPage: findAllWidgetsForPage,
         findWidgetById: findWidgetById,
@@ -39,7 +41,8 @@ module.exports = function () {
     }
 
     function reorderWidget(pageId, start, end) {
-        return Widget
+        return models
+                .pageModel
                 .findPageById(pageId)
                 .then(function(page){
                     var widget = page.widgets.splice(start,1)[0];
@@ -50,5 +53,9 @@ module.exports = function () {
                     function(err){
                         console.log(err);
                 });
+    }
+
+    function setModels(_models) {
+        models = _models;
     }
 };
