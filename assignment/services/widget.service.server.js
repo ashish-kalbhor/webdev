@@ -147,7 +147,7 @@ module.exports = function (app, WebAppModels) {
     }
 
     function sortWidget(req, res) {
-        var pageId = req.params.pageId;
+        var pageId = req.params.pid;
         var initial = parseInt(req.query.initial);
         var final = parseInt(req.query.final);
 
