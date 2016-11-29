@@ -93,8 +93,8 @@
                 .success(function () {
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                 })
-                .error(function () {
-
+                .error(function (error) {
+                    console.log(error);
                 });
         }
 
@@ -104,8 +104,8 @@
                 .success(function () {
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                 })
-                .error(function () {
-
+                .error(function (error) {
+                    console.log(error);
                 });
         }
 
