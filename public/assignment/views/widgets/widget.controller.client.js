@@ -58,7 +58,7 @@
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
                 })
                 .error(function (error) {
-                    console.error(error);
+                    console.log(error);
                 });
 
         }
