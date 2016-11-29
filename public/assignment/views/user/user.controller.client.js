@@ -17,10 +17,10 @@
             UserService
                 .findUserByCredentials(user.username, user.password)
                 .success(function(user){
-                    if(user === '0') {
-                        vm.error = "Unable to login!";
-                    } else {
+                    if(user && user._id) {
                         $location.url("/user/" + user._id);
+                    } else {
+                        vm.error = "Unable to login!";
                     }
                 })
                 .error(function () {
@@ -55,7 +55,7 @@
         }
     }
 
-    function ProfileController($routeParams, UserService) {
+    function ProfileController($location, $routeParams, UserService) {
         var vm = this;
         var userId = $routeParams['uid'];
 
@@ -71,6 +71,7 @@
             });
 
         vm.updateUser = updateUser;
+	vm.deleteUser = deleteUser;
 
         function updateUser(user) {
             UserService
@@ -82,6 +83,17 @@
 
                 });
         }
+
+	function deleteUser() {
+	    UserService
+                .deleteUser(userId)
+                .success(function () {
+                    $location.url("/login");
+                })
+                .error(function (error) {
+                    console.error(error);
+                });
+	}
 
     }
 
