@@ -48,7 +48,7 @@
         </div>
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="text" class="form-control" id="title" placeholder="Page Title"/>
+            <input ng-model="model.editablePage.title" type="text" class="form-control" id="title" placeholder="Page Title"/>
         </div>
         <a ng-click="model.deletePage(model.editablePage._id)" class="btn btn-danger btn-block" href="">Delete</a>
     </form>

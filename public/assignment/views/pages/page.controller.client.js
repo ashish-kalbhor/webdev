@@ -60,7 +60,7 @@
         var vm = this;
         vm.userId = $routeParams['uid'];
         vm.websiteId = $routeParams['wid'];
-        var pageId = parseInt($routeParams['pid']);
+        var pageId = $routeParams['pid'];
         vm.deletePage = deletePage;
         vm.updatePage = updatePage;
 
@@ -97,7 +97,7 @@
                 });
         }
 
-        function updatePage(pageId, page) {
+        function updatePage(page) {
             PageService
                 .updatePage(pageId, page)
                 .success(function () {

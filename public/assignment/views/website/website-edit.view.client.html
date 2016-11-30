@@ -20,7 +20,7 @@
                 <li><a class="navbar-font">Edit Website</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a ng-click="model.updateWebsite(model.website.editableWebsite._id, model.website.editableWebsite)" class="navbar-font" href=""><span class="glyphicon glyphicon-ok"></span></a></li>
+                <li><a ng-click="model.updateWebsite(model.editableWebsite._id, model.editableWebsite)" class="navbar-font" href=""><span class="glyphicon glyphicon-ok"></span></a></li>
             </ul>
         </div>
     </div>
@@ -30,10 +30,10 @@
     <div class="row container-fluid">
         <ul class="list-group">
             <li ng-repeat="website in model.websites" class="list-group-item">
-                <a href="#/user/{{website.developerId}}/website/{{websites._id}}">
+                <a href="#/user/{{model.userId}}/website/{{website._id}}">
                     {{website.name}}
                 </a>
-                <a href="#/user/{{website.developerId}}/website/{{websites._id}}" class="pull-right">
+                <a href="#/user/{{model.userId}}/website/{{website._id}}" class="pull-right">
                     <span class="glyphicon glyphicon-cog"></span>
                 </a>
             </li>
@@ -50,7 +50,7 @@
         </div>
         <div class="form-group">
             <label for="description">Website Description</label>
-            <textarea class="form-control" rows="5" id="description">A Blogging App is an application based on the top of Blogger service. This content will be soon updated. Stay tuned!</textarea>
+            <textarea ng-model="model.editableWebsite.description" class="form-control" rows="5" id="description">Stay tuned!</textarea>
         </div>
         <a ng-click="model.deleteWebsite(model.editableWebsite._id)" class="btn btn-danger btn-block" href="">Delete</a>
     </form>
@@ -64,3 +64,4 @@
     </div>
 </nav>
 </body>
+

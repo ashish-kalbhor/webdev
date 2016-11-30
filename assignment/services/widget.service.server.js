@@ -129,7 +129,7 @@ module.exports = function (app, WebAppModels) {
 
         var widget = {};
         widget._id = widgetId;
-        widget._name = originalname;
+        widget._name = originalName;
         widget.width = width;
         widget.url = url;
 
