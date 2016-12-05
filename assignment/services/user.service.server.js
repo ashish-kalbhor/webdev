@@ -2,26 +2,87 @@ module.exports = function (app, WebAppModels) {
 
     var UserModel = WebAppModels.userModel;
 
+    var passport      = require('passport');
+    var LocalStrategy = require('passport-local').Strategy;
+
+    passport.use(new LocalStrategy(localStrategy));
+    passport.serializeUser(serializeUser);
+    passport.deserializeUser(deserializeUser);
+
+    app.post('/api/login', passport.authenticate('local'), login);
+    app.post('/api/logout', logout);
+    app.post('/api/loggedin', loggedin);
+    app.post ('/api/register', register);
     app.get('/api/user', findUser);
-    app.post('/api/user', createUser);
     app.get('/api/user/:uid', findUserById);
     app.put('/api/user/:uid', updateUser);
     app.delete('/api/user/:uid', deleteUser);
 
-    function createUser(req, res) {
+
+    function login(req, res) {
+        var user = req.user;
+        res.json(user);
+    }
+
+    function logout(req, res) {
+        req.logout();
+        res.sendStatus(200).send();
+    }
+
+    function localStrategy(username, password, done) {
+        UserModel
+            .createUser({username: username, password: password})
+            .then(
+                function (user) {
+                    if(!user) {
+                        return done(null, false);
+                    }
+                    return done(null, user);
+                },
+                function (error) {
+                    return done(error);
+                }
+            )
+    }
+
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    function deserializeUser(user, done) {
+        UserModel
+            .findUserById(user._id)
+            .then(function(user){
+                    done(null, user);
+                },
+                function(err){
+                    done(err, null);
+                }
+            );
+    }
+
+    function loggedin(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
+    function register (req, res) {
         var user = req.body;
 
         UserModel
             .createUser(user)
-            .then(
-                function (user) {
-                    res.send(user);
-                },
-                function (error) {
-                    res.statusCode(400).send(error);
-                }
+            .then(function(user){
+                    if(user){
 
-            )
+                        req.login(user, function(err) {
+                                    if(err) {
+                                        res.status(400).send(err);
+                                    } else {
+                                        res.json(user);
+                                    }
+                        });
+                     }
+                 }
+         );
     }
 
     function findUser(req, res) {

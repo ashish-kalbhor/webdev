@@ -15,7 +15,7 @@
                 vm.error = "Please enter username and password!"
 
             UserService
-                .findUserByCredentials(user.username, user.password)
+                .login(user)
                 .success(function(user){
                     if(user && user._id) {
                         $location.url("/user/" + user._id);
@@ -23,24 +23,26 @@
                         vm.error = "Unable to login!";
                     }
                 })
-                .error(function () {
-
+                .error(function (err) {
+                    if (err === "Unauthorized") {
+                        vm.error = "User not found!!";
+                    }
                 });
         }
     }
 
     function RegisterController($location, UserService) {
         var vm = this;
-        vm.register = register;
+        vm.registerUser = registerUser;
 
-        function register(user) {
+        function registerUser(user) {
             if(user == null || user.username == null){
                 vm.error = "Enter valid name !";
             }else{
 
                 if(user.password == user.verify){
                     UserService
-                        .createUser(user)
+                        .register(user)
                         .success(function (user) {
                             $location.url("/user/" + user._id);
                         })
@@ -71,7 +73,8 @@
             });
 
         vm.updateUser = updateUser;
-	vm.deleteUser = deleteUser;
+	    vm.deleteUser = deleteUser;
+        vm.logout = logout;
 
         function updateUser(user) {
             UserService
@@ -94,6 +97,17 @@
                     console.error(error);
                 });
 	}
+
+        function logout() {
+            UserService
+                .logout()
+                .success(function () {
+                    $location.url("/login");
+                })
+                .error(function (err) {
+                    console.log(err);
+                });
+        }
 
     }
 
