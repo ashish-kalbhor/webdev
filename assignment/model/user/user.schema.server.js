@@ -4,6 +4,14 @@ module.exports = function () {
     var UserSchema = mongoose.Schema({
        username: {type: String, required: true},
        password: String,
+       facebook: {
+          id: String,
+          token: String
+       } ,
+       google:   {
+          id:    String,
+          token: String
+       },
        firstName: String,
        lastName: String,
        email: String,

@@ -1,9 +1,9 @@
 module.exports = function () {
 
-    //var connectionString = 'mongodb://heroku_gb8bxpqj:e9erkuff8cuet1t0e621jepnuv@ds033116.mlab.com:33116/heroku_gb8bxpqj';
-    mongoose.connect("mongodb://localhost/cs5610-assignment");
+    var mongoose = require("mongoose");
+    var connectionString = "mongodb://localhost/cs5610-assignment";
     if(process.env.HEROKU_MONGODB_DB_PASSWORD) {
-        connectionString = "mongodb://"
+        connectionString = "mongodb://" +
             process.env.HEROKU_MONGODB_DB_USERNAME + ":" +
             process.env.HEROKU_MONGODB_DB_PASSWORD + "@" +
             process.env.HEROKU_MONGODB_DB_HOST + ':' +
@@ -11,8 +11,8 @@ module.exports = function () {
             process.env.HEROKU_APP_NAME;
     }
 
-    var mongoose = require("mongoose");
 
+    //mongoose.connect("mongodb://localhost/cs5610-assignment");
     mongoose.connect(connectionString);
 
     var userModel = require("./user/user.model.server")();

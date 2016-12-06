@@ -9,6 +9,7 @@
             login: login,
             logout: logout,
             checkLoggedin: checkLoggedin,
+            findLoggedInUser: findLoggedInUser,
             register: register,
             findUserById : findUserById,
             findUserByUsername : findUserByUsername,
@@ -26,6 +27,11 @@
                 password: user.password
             };
             return $http.post(url, user);
+        }
+
+        function findLoggedInUser() {
+            var url = "/api/user";
+            return $http.get(url);
         }
 
         function logout() {

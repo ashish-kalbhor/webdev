@@ -13,21 +13,23 @@
 
             if(user == null)
                 vm.error = "Please enter username and password!"
+            else{
+                UserService
+                    .login(user)
+                    .success(function(user){
+                        if(user && user._id) {
+                            $location.url("/user/" + user._id);
+                        } else {
+                            vm.error = "Unable to login!";
+                        }
+                    })
+                    .error(function (err) {
+                        if (err === "Unauthorized") {
+                            vm.error = "User not found!!";
+                        }
+                    });
+            }
 
-            UserService
-                .login(user)
-                .success(function(user){
-                    if(user && user._id) {
-                        $location.url("/user/" + user._id);
-                    } else {
-                        vm.error = "Unable to login!";
-                    }
-                })
-                .error(function (err) {
-                    if (err === "Unauthorized") {
-                        vm.error = "User not found!!";
-                    }
-                });
         }
     }
 
@@ -59,13 +61,14 @@
 
     function ProfileController($location, $routeParams, UserService) {
         var vm = this;
-        var userId = $routeParams['uid'];
+        //var userId = $routeParams['uid'];
 
         UserService
-            .findUserById(userId)
+            .findLoggedInUser()
             .success(function(user){
                 if(user != '0'){
                     vm.user = user;
+                    vm.userId = user._id;
                 }
             })
             .error(function () {
@@ -78,7 +81,7 @@
 
         function updateUser(user) {
             UserService
-                .updateUser(userId, user)
+                .updateUser(vm.userId, user)
                 .success(function(user){
 
                 })
@@ -87,16 +90,16 @@
                 });
         }
 
-	function deleteUser() {
-	    UserService
-                .deleteUser(userId)
-                .success(function () {
-                    $location.url("/login");
-                })
-                .error(function (error) {
-                    console.error(error);
-                });
-	}
+        function deleteUser() {
+            UserService
+                    .deleteUser(vm.userId)
+                    .success(function () {
+                        $location.url("/login");
+                    })
+                    .error(function (error) {
+                        console.error(error);
+                    });
+        }
 
         function logout() {
             UserService
