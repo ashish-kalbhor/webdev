@@ -28,7 +28,7 @@
                 controller: "ProfileController",
                 controllerAs: "model",
                 resolve: {
-                    loggedIn: checkLoggedin
+                    loggedIn: checkLoggedIn
                 }
             })
             .when("/user/:uid/website", {

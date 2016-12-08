@@ -22,8 +22,8 @@ module.exports = function (app, WebAppModels) {
     var GoogleStrategy   = require('passport-google-oauth').OAuth2Strategy;
 
     passport.use(new LocalStrategy(localStrategy));
-    passport.use(new FacebookStrategy(fbConfig, fbStrategy));
-    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+    //passport.use(new FacebookStrategy(fbConfig, fbStrategy));
+    //passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
