@@ -2,7 +2,7 @@ module.exports = function () {
 
     var mongoose = require("mongoose");
     var connectionString = "mongodb://localhost/cs5610-assignment";
-    if(process.env.HEROKU_MONGODB_DB_PASSWORD) {
+    if(process.env.HEROKU_MONGODB_DB_USERNAME) {
         connectionString = "mongodb://" +
             process.env.HEROKU_MONGODB_DB_USERNAME + ":" +
             process.env.HEROKU_MONGODB_DB_HOST + ':' +
@@ -12,7 +12,6 @@ module.exports = function () {
 
 
     //mongoose.connect("mongodb://localhost/cs5610-assignment");
-    connectionString = "mongodb://heroku_gb8bxpqj:e9erkuff8cuet1t0e621jepnuv@ds033116.mlab.com:33116/heroku_gb8bxpqj";
     mongoose.connect(connectionString);
 
     var userModel = require("./user/user.model.server")();
