@@ -4,7 +4,6 @@ var multer        = require('multer');
 var passport      = require('passport');
 var cookieParser  = require('cookie-parser');
 var session       = require('express-session');
-var mongoose      = require('mongoose');
 
 var bodyParser = require('body-parser');
 app.use(bodyParser.json());
