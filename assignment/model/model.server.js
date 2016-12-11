@@ -12,6 +12,7 @@ module.exports = function () {
 
 
     //mongoose.connect("mongodb://localhost/cs5610-assignment");
+    connectionString = "mongodb://heroku_gb8bxpqj:e9erkuff8cuet1t0e621jepnuv@ds033116.mlab.com:33116/heroku_gb8bxpqj";
     mongoose.connect(connectionString);
 
     var userModel = require("./user/user.model.server")();
