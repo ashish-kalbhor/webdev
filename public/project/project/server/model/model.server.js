@@ -4,7 +4,6 @@ module.exports = function () {
     if(process.env.HEROKU_MONGODB_DB_PASSWORD) {
         connectionString = "mongodb://" +
             process.env.HEROKU_MONGODB_DB_USERNAME + ":" +
-            process.env.HEROKU_MONGODB_DB_PASSWORD + "@" +
             process.env.HEROKU_MONGODB_DB_HOST + ':' +
             process.env.HEROKU_MONGODB_DB_PORT + '/' +
             process.env.HEROKU_APP_NAME;
