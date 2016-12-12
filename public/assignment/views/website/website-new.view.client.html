@@ -12,6 +12,7 @@
             </ul>
         </div>
         <div class="col-xs-12 col-sm-8">
+            <form name="submitform" novalidate>
             <ul class="nav navbar-nav">
                 <li><a class="navbar-font navbar-link visible-xs" href="#/user/{{model.userId}}/website"><span class="glyphicon glyphicon-chevron-left"></span></a></li>
             </ul>
@@ -19,8 +20,13 @@
                 <li><a class="navbar-font">New Website</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a ng-click="model.createWebsite(model.website)" class="navbar-font"><span class="glyphicon glyphicon-ok"></span></a></li>
+                <li><button form="websiteform" type="submit"
+                            ng-click="model.createWebsite(model.website)"
+                            class="navbar-font btn update-btn">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button></li>
             </ul>
+            </form>
         </div>
     </div>
 </nav>
@@ -41,7 +47,7 @@
 </div>
 
 <div class="col-xs-12 col-sm-8">
-    <form class="padding-left">
+    <form class="padding-left" novalidate name="websiteform" id="websiteform">
         <div ng-show="model.error" class="alert alert-danger" role="alert">
             {{model.error}}
         </div>
@@ -51,8 +57,11 @@
                    ng-model="model.website.name"
                    class="form-control"
                    id="name"
-                   required
+                   required name="websitename"
                    placeholder="Name"/>
+        </div>
+        <div ng-show="websiteform.websitename.$invalid && websiteform.$submitted" class="error">
+            Website name is required
         </div>
         <div class="form-group">
             <label for="description">Description</label>

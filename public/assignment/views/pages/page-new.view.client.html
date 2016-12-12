@@ -19,7 +19,10 @@
                 <li><a class="navbar-font">New Page</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right pull-right">
-                <li><a ng-click="model.createPage(model.newPage)" class="navbar-font" href=""><span class="glyphicon glyphicon-ok"></span></a></li>
+                <li><button form="pageform" type="submit"
+                        ng-click="model.createPage(model.newPage)"
+                        class="navbar-font btn update-btn" href="">
+                    <span class="glyphicon glyphicon-ok"></span></button></li>
             </ul>
         </div>
     </div>
@@ -44,10 +47,15 @@
     <div ng-if="model.error" class="alert alert-danger">
         {{model.error}}
     </div>
-    <form class="padding-left-12">
+    <form class="padding-left-12" novalidate name="pageform" id="pageform">
         <div class="form-group">
             <label for="name">Page Name</label>
-            <input ng-model="model.newPage.name" required type="text" class="form-control" id="name" placeholder="Page Name"/>
+            <input ng-model="model.newPage.name"
+                   required name="pagename"
+                   type="text" class="form-control" id="name" placeholder="Page Name"/>
+        </div>
+        <div ng-show="pageform.pagename.$invalid && pageform.$submitted" class="error">
+            Page name is required
         </div>
         <div class="form-group">
             <label for="title">Page Title</label>
