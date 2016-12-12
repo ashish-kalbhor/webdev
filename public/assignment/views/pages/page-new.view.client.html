@@ -41,6 +41,9 @@
 </div>
 
 <div class="col-xs-12 col-sm-8">
+    <div ng-if="model.error" class="alert alert-danger">
+        {{model.error}}
+    </div>
     <form class="padding-left-12">
         <div class="form-group">
             <label for="name">Page Name</label>

@@ -32,7 +32,7 @@
                     vm.websites = websites;
                 })
                 .error(function () {
-
+                    vm.error = "Error loading websites for the user. Please try again!";
                 });
         }
         init();
@@ -48,7 +48,7 @@
                         $location.url("/user/" + vm.userId + "/website");
                     })
                     .error(function () {
-
+                        vm.error = "Error creating the website. Please try again!"
                     });
             }
         }
@@ -68,7 +68,7 @@
                     vm.websites = websites;
                 })
                 .error(function () {
-
+                    vm.error = "Error loading websites for this user. Please try again!";
                 });
 
             WebsiteService
@@ -77,7 +77,7 @@
                     vm.editableWebsite = website;
                 })
                 .error(function () {
-
+                    vm.error = "Error loading website for this user. Please try again!";
                 });
         }
         init();
@@ -89,19 +89,26 @@
                     $location.url("/user/" + vm.userId + "/website");
                 })
                 .error(function () {
-
+                    vm.error = "Error deleting website for this user. Please try again!";
                 });
         }
 
         function updateWebsite(websiteId, website) {
-            WebsiteService
-                .updateWebsite(websiteId, website)
-                .success(function () {
-                    $location.url("/user/" + vm.userId + "/website");
-                })
-                .error(function () {
 
-                });
+            if(website == null || website.name == null){
+                vm.error = "Please enter website name!";
+            }else{
+                WebsiteService
+                    .updateWebsite(websiteId, website)
+                    .success(function () {
+                        $location.url("/user/" + vm.userId + "/website");
+                    })
+                    .error(function () {
+                        vm.error = "Error updating website for this user. Please try again!";
+                    });
+            }
+
+
         }
 
     }

@@ -34,7 +34,7 @@
                     vm.pages = pages;
                 })
                 .error(function () {
-
+                    vm.error = "Error loading pages for this website. Please try again!";
                 });
         }
 
@@ -50,7 +50,7 @@
                         $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/");
                     })
                     .error(function () {
-
+                        vm.error = "Error creating pages for this website. Please try again!";
                     });
             }
         }
@@ -73,7 +73,7 @@
                     vm.pages = pages;
                 })
                 .error(function () {
-
+                    vm.error = "Error loading pages for this website. Please try again!";
                 });
 
             PageService
@@ -82,7 +82,7 @@
                     vm.editablePage = page;
                 })
                 .error(function () {
-
+                    vm.error = "Error loading page for this website. Please try again!";
                 });
         }
 
@@ -93,19 +93,24 @@
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
                 })
                 .error(function () {
-
+                    vm.error = "Error deleting page for this website. Please try again!";
                 });
         }
 
         function updatePage(page) {
-            PageService
-                .updatePage(pageId, page)
-                .success(function () {
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
-                })
-                .error(function () {
+            if(page == null || page.name == null){
+                vm.error = "Enter Page name before updating !";
+            }else{
+                PageService
+                    .updatePage(pageId, page)
+                    .success(function () {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page");
+                    })
+                    .error(function () {
+                        vm.error = "Error updating page for this website. Please try again!";
+                    });
+            }
 
-                });
         }
     }
 

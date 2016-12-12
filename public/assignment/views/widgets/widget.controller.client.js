@@ -58,7 +58,7 @@
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget/" + vm.widgetId);
                 })
                 .error(function (error) {
-                    console.log(error);
+                    vm.error = "Error creating widget";
                 });
 
         }
@@ -81,7 +81,7 @@
                     vm.editableWidget = widget;
                 })
                 .error(function (error) {
-                    console.error("Widget Controller:: " + error);
+                    vm.error = "Error loading widgets for this page. Please try again!";
                 });
         }
         init();
@@ -94,19 +94,24 @@
                     $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
                 })
                 .error(function (error) {
-                    console.log(error);
+                    vm.error = "Error deleting widget for this page. Please try again!";
                 });
         }
 
         function updateWidget(widget) {
-            WidgetService
-                .updateWidget(vm.widgetId, widget)
-                .success(function () {
-                    $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
-                })
-                .error(function (error) {
-                    console.log(error);
-                });
+
+            if(widget == null || widget.name == null){
+                vm.error = "Please provide Widget name before saving!"
+            }else{
+                WidgetService
+                    .updateWidget(vm.widgetId, widget)
+                    .success(function () {
+                        $location.url("/user/" + vm.userId + "/website/" + vm.websiteId + "/page/" + vm.pageId + "/widget");
+                    })
+                    .error(function (error) {
+                        vm.error = "Error updating widget for this page. Please try again!";
+                    });
+            }
         }
 
     }
