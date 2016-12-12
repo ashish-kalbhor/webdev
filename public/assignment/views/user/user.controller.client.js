@@ -11,7 +11,7 @@
 
         function login(user) {
 
-            if(user == null)
+            if(user == null || user.username == null || user.password == null)
                 vm.error = "Please enter username and password!"
             else{
                 UserService
@@ -40,6 +40,8 @@
         function registerUser(user) {
             if(user == null || user.username == null){
                 vm.error = "Enter valid name !";
+            }else if(user.password == null || user.verify == null){
+                vm.error = "Enter a password !";
             }else{
 
                 if(user.password == user.verify){
