@@ -79,6 +79,7 @@ module.exports = function (app, WebAppModels) {
                     } else {
                         var names = profile.displayName.split(" ");
                         var newFacebookUser = {
+                            username: names[0],
                             lastName:  names[1],
                             firstName: names[0],
                             email:     profile.emails ? profile.emails[0].value : "",
@@ -126,6 +127,7 @@ module.exports = function (app, WebAppModels) {
                         return done(null, user);
                     } else {
                         var newGoogleUser = {
+                            username: profile.name.givenName,
                             lastName: profile.name.familyName,
                             firstName: profile.name.givenName,
                             email: profile.emails[0].value,
