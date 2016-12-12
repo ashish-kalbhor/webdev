@@ -34,10 +34,10 @@ module.exports = function (app, WebAppModels) {
     app.get('/api/user', findUser);
     app.get('/auth/facebook', passport.authenticate('facebook', {scope: 'email'}));
     app.get('/auth/facebook/callback', passport.authenticate('facebook',
-        {successRedirect: '#/user', failureRedirect: '#/login'}));
+        {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'}));
     app.get   ('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
     app.get   ('/auth/google/callback', passport.authenticate('google',
-        {successRedirect: '#/user', failureRedirect: '#/login'}));
+        {successRedirect: '/assignment/#/user', failureRedirect: '/assignment/#/login'}));
     app.get('/api/user/:uid', findUserById);
     app.put('/api/user/:uid', updateUser);
     app.delete('/api/user/:uid', deleteUser);
